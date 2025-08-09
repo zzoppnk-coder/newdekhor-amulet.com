@@ -1,0 +1,1 @@
+# newdekhor-amulet.com
