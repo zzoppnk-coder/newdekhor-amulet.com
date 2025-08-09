@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>นิวเด็กหอพระเครื่อง</title>
+  <style>
+    body { 
+      font-family: sans-serif; 
+      margin: 0; 
+      padding: 0; 
+      background: #f2f2f2; 
+    }
+    header, footer { 
+      background: #222; 
+      color: white; 
+      padding: 20px; 
+      text-align: center; 
+    }
+    main { padding: 20px; }
+    nav { 
+      text-align: center; 
+      margin-bottom: 20px; 
+      background: #fff; 
+      padding: 10px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    nav a { 
+      margin: 0 10px; 
+      text-decoration: none; 
+      color: #007bff; 
+      font-weight: bold;
+    }
+    nav a:hover { text-decoration: underline; }
+
+    /* ส่วนจัดสินค้าแบบซ้าย-ขวาเท่ากัน */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card .img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .card .meta {
+      padding: 10px;
+    }
+    .card .title { 
+      font-weight: bold; 
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .card .sub { 
+      font-size: 14px; 
+      color: #666; 
+      margin-bottom: 5px;
+    }
+    .card .price {
+      font-size: 16px;
+      font-weight: bold;
+      color: #d9534f;
+      margin-bottom: 8px;
+    }
+
+    .card .actions {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      gap: 5px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 6px;
+      background: #007bff;
+      color: white;
+      text-decoration: none;
+      text-align: center;
+      font-size: 14px;
+    }
+    .btn.line {
+      background: #28a745;
+    }
+    .btn[style*="background:#ccc"] {
+      background: #ccc !important;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .controls input, 
+    .controls select, 
+    .controls button {
+      padding: 8px;
+      font-size: 14px;
+    }
+    .controls input, 
+    .controls select {
+      flex: 1;
+    }
+    .controls button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .controls button:hover {
+      background: #0056b3;
+    }
+
+    footer a {
+      color: #0dcaf0;
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="intro">
+      นิวเด็กหอพระเครื่อง — เเบ่งปันพระเครื่อง    (สินค้าทั้งหมด) — สามารถค้นหาและกรองได้
+    </div>
+  </header>
+
+  <nav>
+    <a href="index.html">วัตถุมงคลโปรโมชั่นวันเเม่</a>
+    <a href="new3.html">ติดต่อเรา</a>
+  </nav>
+
+  <main class="container">
+    <div class="controls">
+      <input id="search" placeholder="ค้นหาชื่อพระ หรือคำอธิบาย" />
+      <select id="filter">
+        <option value="all">แสดงทั้งหมด</option>
+        <option value="available">พร้อมบูชา</option>
+        <option value="sold">ขายแล้ว</option>
+      </select>
+      <button id="reset">รีเซ็ต</button>
+    </div>
+    
+    <section id="list" class="grid"></section>
+  </main>
+
+  <footer>
+    <div class="note">
+      ติดต่อสั่งซื้อ: <strong>Line ID: 
+        <a href="https://line.me/ti/p/ejrDqUT205">สอบถามรายละเอียดเพิ่มเติม LINE</a>
+      </strong>
+    </div>
+  </footer>
+
+  <script>
+    const items = [
+      {id:1,name:'ราหูอมจันทร์/กะลาตาเดียว/หลวงปู่นะวัดหนองบัวยุคต้นก่อน2550 (โปรวันเเม่)<p><s>ปกติ: 1,000 บาท</s></p>',year:2550,price:'700',status:'available',img: 'https://lh5.googleusercontent.com/d/135pcuJBa98km6cpLOPxUhWyozXg1sknI',desc:'หายาก!!!!หลวงปู่นะวัดหนองบัว <br>สายหลวงปู่ศุขวัดปากคลอง '},
+      {id:2,name:'เหรียญหลวงพ่อวิชัย วัดหัวเด่น รุ่นเสมาสร้างบารมี ปี2568(โปรวันเเม่)<p><s>ปกติ: 400 บาท</s></p>',year:2568,price:'399',status:'available',img:'https://lh5.googleusercontent.com/d/13PmW4UD9dG7-LNVxztE0qENS4-0d0h5c',desc:'เสมาเนื้อทองเเดงขอบนวโลหะ สร้าง168องค์ '},
+      {id:3,name:'นกคุ้มเขาควาย หลวงพ่อกวยปี68 (โปรวันเเม่)<p><s>ปกติ: 300 บาท</s></p>',year:2568,price:'250',status:'available',img:'https://lh5.googleusercontent.com/d/13dp3r68yXjn1dRDOcZbHQn5sL1bDnGnb',desc:'นกคุ้มกันภัย ป้องกันบ้านป้องกันภัยโชคลาภ '},
+      {id:4,name:'พระผงนางกวักโภคทรัพย์หลวงพ่อวิชัยวัดหัวเด่นปี2567(โปรวันเเม่) <p><s>ปกติ: 200 บาท</s></p>',year:2567,price:'150',status:'available',img:'https://lh5.googleusercontent.com/d/1324wBLElc9sGq2Qt_nveR-mEyrkOdR4r',desc:'<br>ผสมมวลสารเก่าหลวงพ่อกวย วัดโฆสิตาราม <br> พุทธคุณโดดเด่นทางด้านโชคลาภโภคทรัพย์<br>หนุนดวง แคล้วคลาด มหาเสน่ห์'},
+      {id:5,name:'ตัวพ.พานหลวงพ่อวิชัยวัดหัวเด่นปี 2568(โปรวันเเม่)<p><s>ปกติ: 700 บาท</s></p>',year:2568,price:'600',status:'available',img:'https://lh5.googleusercontent.com/d/131S6ljLn56kNdGyGW5Cu8hK6Xam9mlCt',desc:'สายขาว!!หลวงพ่อวิชัยท่าผูกด้วยตัวเอง ท่านร่ำเรียนการสร้างหุ่น การทำตัว.พพาน<br> มาจากหลวงปู่เย็น'},
+      {id:6,name:'พระกันผีมารวิชัยหลวงพ่อกวย62 รันนัมเบอร์ เลข8(โปรวันเเม่)<p><s>ปกติ: 400 บาท</s></p>',year:2562,price:'300',status:'available',img:'https://lh5.googleusercontent.com/d/14AGmfZBfjgYu9IXV6M0YZ-K3FuEK5Vf7',desc:'กันผีเลข 8 เลขเเห่งความสำเร็จ ร่ำรวย '},
+      {id:7,name:'เหรียญหลวงพ่อกวยวัดเดิมบางปี67 (โปรวันเเม่)<p><s>ปกติ: 200 บาท</s></p>',year:2567,price:'111',status:'available',img:'https://lh5.googleusercontent.com/d/14GMOESFG-42-Rg3J7AiRDVk1mfA2klNN',desc:'จัดสร้าง10000เหรียญมีรันเลขทุกเหรียญ'},
+      {id:8,name:'เหรียญหลวงพ่อวิชัย วัดหัวเด่น รุ่นไตรมาส 68 เนื้อเงิน ฝังเเผ่นทองคำเเท้ เลข10 (โปรวันเเม่)<p><s>ปกติ: 22,000 บาท</s></p>',year:2568,price:'20,000',status:'available',img:'https://lh5.googleusercontent.com/d/14enOLRlG9aexl1zP-YNm7Udl1kuYm7yk',desc:'สร้างเพื่อสมทบทุนสร้างโรงครัว<br> วัดหัวเด่น จังหวัดชัยนาท จัดสร้าง100 เหรียญ <br>มีรันเลขทุกเหรียญ'},
+      {id:9,name:'เหรียญหลวงพ่อวิชัย วัดหัวเด่น รุ่นเเรกปี60 ยอดนิยม สร้าง300เหรียญ รันเลขสวย246 (โปรวันเเม่)<p><s>ปกติ: 25,000 บาท</s></p>',year:2568,price:'20,000',status:'available',img:'https://lh5.googleusercontent.com/d/14fctAaiDZTQCzzDc9KEL6SdDtm8dpNO9',desc:'สร้างน้อยยอดนิยม<br>หมุนเวียนน้อยมากๆๆๆ <br>ไปอยู่ต่างประเทศหลายเหรีญเเล้ว'},
+      
+ ];
+    const listEl = document.getElementById('list');
+    const searchEl = document.getElementById('search');
+    const filterEl = document.getElementById('filter');
+    const resetEl = document.getElementById('reset');
+
+    function render(data) {
+      listEl.innerHTML = '';
+      if(data.length === 0){
+        listEl.innerHTML = '<div class="note">ไม่พบสินค้า</div>';
+        return;
+      }
+      data.forEach(it => {
+        const el = document.createElement('div');
+        el.className = 'card';
+        el.innerHTML = `
+          <div class="img"><img src="${it.img}" alt="${it.name}"></div>
+          <div class="meta">
+            <div class="title">${it.name}</div>
+            <div class="sub">พ.ศ. ${it.year} • ${it.desc}</div>
+            <div class="price">฿ ${it.price}</div>
+            <div class="sub">สถานะ: ${it.status==='available'?'พร้อมบูชา':'ขายแล้ว'}</div>
+          </div>
+          <div class="actions">
+            ${it.status==='available'?`<a href="https://line.me/ti/p/ejrDqUT205" class="btn buy">สั่งซื้อ</a>`:`<span class="btn" style="background:#ccc;color:#fff;">ขายแล้ว</span>`}
+            <a href="https://line.me/ti/p/ejrDqUT205" class="btn line">แอดไลน์</a>
+          </div>
+        `;
+        listEl.appendChild(el);
+      });
+    }
+
+    function applyFilters(){
+      const q = searchEl.value.toLowerCase();
+      const f = filterEl.value;
+      let filtered = items.filter(it => {
+        const matchQ = it.name.toLowerCase().includes(q) || it.desc.toLowerCase().includes(q);
+        const matchF = f==='all' || it.status===f;
+        return matchQ && matchF;
+      });
+      render(filtered);
+    }
+
+    searchEl.addEventListener('input', applyFilters);
+    filterEl.addEventListener('change', applyFilters);
+    resetEl.addEventListener('click', ()=>{searchEl.value='';filterEl.value='all';applyFilters();});
+
+    render(items);
+  </script>
+</body>
+</html>
